@@ -6,21 +6,32 @@ part of 'app_database.dart';
 // FloorGenerator
 // **************************************************************************
 
+abstract class $AppDatabaseBuilderContract {
+  /// Adds migrations to the builder.
+  $AppDatabaseBuilderContract addMigrations(List<Migration> migrations);
+
+  /// Adds a database [Callback] to the builder.
+  $AppDatabaseBuilderContract addCallback(Callback callback);
+
+  /// Creates the database and initializes it.
+  Future<AppDatabase> build();
+}
+
 // ignore: avoid_classes_with_only_static_members
 class $FloorAppDatabase {
   /// Creates a database builder for a persistent database.
   /// Once a database is built, you should keep a reference to it and re-use it.
-  static _$AppDatabaseBuilder databaseBuilder(String name) =>
+  static $AppDatabaseBuilderContract databaseBuilder(String name) =>
       _$AppDatabaseBuilder(name);
 
   /// Creates a database builder for an in memory database.
   /// Information stored in an in memory database disappears when the process is killed.
   /// Once a database is built, you should keep a reference to it and re-use it.
-  static _$AppDatabaseBuilder inMemoryDatabaseBuilder() =>
+  static $AppDatabaseBuilderContract inMemoryDatabaseBuilder() =>
       _$AppDatabaseBuilder(null);
 }
 
-class _$AppDatabaseBuilder {
+class _$AppDatabaseBuilder implements $AppDatabaseBuilderContract {
   _$AppDatabaseBuilder(this.name);
 
   final String? name;
@@ -29,19 +40,19 @@ class _$AppDatabaseBuilder {
 
   Callback? _callback;
 
-  /// Adds migrations to the builder.
-  _$AppDatabaseBuilder addMigrations(List<Migration> migrations) {
+  @override
+  $AppDatabaseBuilderContract addMigrations(List<Migration> migrations) {
     _migrations.addAll(migrations);
     return this;
   }
 
-  /// Adds a database [Callback] to the builder.
-  _$AppDatabaseBuilder addCallback(Callback callback) {
+  @override
+  $AppDatabaseBuilderContract addCallback(Callback callback) {
     _callback = callback;
     return this;
   }
 
-  /// Creates the database and initializes it.
+  @override
   Future<AppDatabase> build() async {
     final path = name != null
         ? await sqfliteDatabaseFactory.getDatabasePath(name!)
@@ -63,8 +74,11 @@ class _$AppDatabase extends AppDatabase {
 
   TasksDao? _tasksDaoInstance;
 
-  Future<sqflite.Database> open(String path, List<Migration> migrations,
-      [Callback? callback]) async {
+  Future<sqflite.Database> open(
+    String path,
+    List<Migration> migrations, [
+    Callback? callback,
+  ]) async {
     final databaseOptions = sqflite.OpenDatabaseOptions(
       version: 2,
       onConfigure: (database) async {
@@ -97,8 +111,10 @@ class _$AppDatabase extends AppDatabase {
 }
 
 class _$TasksDao extends TasksDao {
-  _$TasksDao(this.database, this.changeListener)
-      : _queryAdapter = QueryAdapter(database),
+  _$TasksDao(
+    this.database,
+    this.changeListener,
+  )   : _queryAdapter = QueryAdapter(database),
         _taskInsertionAdapter = InsertionAdapter(
             database,
             'Task',
@@ -152,7 +168,9 @@ class _$TasksDao extends TasksDao {
 
   @override
   Future<List<Task>> getTasksSortedByDateCreated(
-      String query, bool hideCompleted) async {
+    String query,
+    bool hideCompleted,
+  ) async {
     return _queryAdapter.queryList(
         'SELECT * FROM Task WHERE (completed != ?2 OR completed = 0) AND name LIKE ?1 ORDER BY important DESC, created',
         mapper: (Map<String, Object?> row) => Task(id: row['id'] as int?, name: row['name'] as String?, important: row['important'] == null ? null : (row['important'] as int) != 0, completed: row['completed'] == null ? null : (row['completed'] as int) != 0, created: row['created'] as int?),
@@ -161,7 +179,9 @@ class _$TasksDao extends TasksDao {
 
   @override
   Future<List<Task>> getTasksSortedByName(
-      String query, bool hideCompleted) async {
+    String query,
+    bool hideCompleted,
+  ) async {
     return _queryAdapter.queryList(
         'SELECT * FROM Task WHERE (completed != ?2 OR completed = 0) AND name LIKE ?1 ORDER BY important DESC, name',
         mapper: (Map<String, Object?> row) => Task(id: row['id'] as int?, name: row['name'] as String?, important: row['important'] == null ? null : (row['important'] as int) != 0, completed: row['completed'] == null ? null : (row['completed'] as int) != 0, created: row['created'] as int?),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get .dart';
+import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:todo_clone/controller/tasks_controller.dart';
 import 'package:todo_clone/core/constants/app_constants.dart';
 import 'package:todo_clone/core/theme/app_colors.dart';
-import 'package:todo_x`clone/core/theme/app_text_styles.dart';
+import 'package:todo_clone/core/theme/app_text_styles.dart';
 import 'package:todo_clone/routes/app_routes.dart';
 import 'package:todo_clone/ui/tasks/widgets/attention_dialog.dart';
 import 'package:todo_clone/ui/tasks/widgets/search_app_bar_widget.dart';
