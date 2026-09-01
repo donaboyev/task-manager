@@ -21,7 +21,7 @@ class TasksController extends GetxController {
   Future<void> onInit() async {
     searchController = TextEditingController();
     _hideCompleted.value = _repository!.getHideCompleted();
-    getTasks();
+    await getTasks();
     super.onInit();
   }
 
@@ -43,14 +43,14 @@ class TasksController extends GetxController {
 
   Future<void> setSortOrder(SortOrder order) async {
     if (order == _repository!.getSortOrder()) return;
-    _repository.setSortOrder(order);
-    getTasks();
+    await _repository.setSortOrder(order);
+    await getTasks();
   }
 
   Future<void> setHideCompleted() async {
-    _repository!.setHideCompleted(!_hideCompleted.value);
+    await _repository!.setHideCompleted(!_hideCompleted.value);
     _hideCompleted.value = !_hideCompleted.value;
-    getTasks();
+    await getTasks();
   }
 
   Future<void> getTasks() async {
@@ -93,7 +93,7 @@ class TasksController extends GetxController {
 
   Future<void> deleteCompletedTasks() async {
     await _repository!.deleteCompletedTasks();
-    getTasks();
+    await getTasks();
   }
 
   bool get isSearching => _isSearching.value;
