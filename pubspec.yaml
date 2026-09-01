@@ -3,7 +3,7 @@ description: Task manager App by Abbos Donaboyev
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.1.1+6
+version: 1.1.1+7
 
 environment:
   sdk: ^3.13.2
@@ -13,21 +13,19 @@ dependencies:
     sdk: flutter
   get: ^4.7.3
   intl: ^0.20.3
-  floor: ^1.5.0
-  equatable: ^2.1.0
   get_storage: ^2.1.1
-  google_fonts: ^8.2.1
-  url_launcher: ^6.3.2
-  cupertino_icons: ^1.0.9
-  modal_bottom_sheet: ^3.0.0
   keyboard_dismisser: ^3.0.0
+  drift: ^2.34.3
+  drift_flutter: ^0.3.1
+  sqflite: ^2.4.3
+  path: ^1.9.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^2.4.13
-  flutter_lints: ^1.0.4
-  floor_generator: ^1.5.0
+  build_runner: ^2.16.0
+  flutter_lints: ^6.0.0
+  drift_dev: ^2.34.5
 
 flutter:
   uses-material-design: true

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_clone/core/constants/app_constants.dart';
-import 'package:todo_clone/data/local/floor/entity/task.dart';
+import 'package:todo_clone/data/model/task.dart';
 import 'package:todo_clone/data/repository/tasks_repository.dart';
 
 class TasksController extends GetxController {

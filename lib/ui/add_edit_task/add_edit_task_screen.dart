@@ -7,12 +7,12 @@ import 'package:todo_clone/controller/tasks_controller.dart';
 import 'package:todo_clone/core/custom_widgets/custom_text_field.dart';
 import 'package:todo_clone/core/theme/app_colors.dart';
 import 'package:todo_clone/core/theme/app_text_styles.dart';
-import 'package:todo_clone/data/local/floor/entity/task.dart';
+import 'package:todo_clone/data/model/task.dart';
 
 class AddEditTaskPage extends GetView<AddEditTaskController> {
   final FocusNode _inputFocus = FocusNode();
 
-  AddEditTaskPage({Key? key}) : super(key: key);
+  AddEditTaskPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -74,11 +74,11 @@ class AddEditTaskPage extends GetView<AddEditTaskController> {
                   ],
                 ),
                 Visibility(
+                  visible: task != null,
                   child: Text(
                     'Created: ${BaseFunctions.getCreatedDate(task?.created ?? 0)}',
                     style: styImportantNotes,
                   ),
-                  visible: task != null,
                 ),
               ],
             ),

@@ -1,6 +1,6 @@
 import 'package:todo_clone/core/constants/app_constants.dart';
-import 'package:todo_clone/data/local/floor/entity/task.dart';
 import 'package:todo_clone/data/local/local_source.dart';
+import 'package:todo_clone/data/model/task.dart';
 
 class TasksRepository {
   final LocalSource? _localSource = LocalSource.getInstance();

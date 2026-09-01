@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:todo_clone/controller/tasks_controller.dart';
 import 'package:todo_clone/core/theme/app_colors.dart';
 import 'package:todo_clone/core/theme/app_text_styles.dart';
-import 'package:todo_clone/data/local/floor/entity/task.dart';
+import 'package:todo_clone/data/model/task.dart';
 
 class TaskItem extends GetView<TasksController> {
   final Task? task;
@@ -12,12 +12,12 @@ class TaskItem extends GetView<TasksController> {
   final VoidCallback? onTaskTap;
 
   const TaskItem({
-    Key? key,
+    super.key,
     this.task,
     this.onCheck,
     this.onSwiped,
     this.onTaskTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +27,7 @@ class TaskItem extends GetView<TasksController> {
       child: GetBuilder<TasksController>(
         builder: (tasksController) {
           return Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8.0,
-              vertical: 4,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(
@@ -59,8 +56,9 @@ class TaskItem extends GetView<TasksController> {
                                     shape: const CircleBorder(),
                                     value: task!.completed,
                                     onChanged: (value) => onCheck!(value!),
-                                    activeColor:
-                                        task!.important! ? clrRed : clrBreaker,
+                                    activeColor: task!.important!
+                                        ? clrRed
+                                        : clrBreaker,
                                     side: BorderSide(
                                       color: task!.important!
                                           ? clrRed
@@ -69,17 +67,18 @@ class TaskItem extends GetView<TasksController> {
                                   ),
                                   Expanded(
                                     child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 8.0),
+                                      padding: const EdgeInsets.only(
+                                        right: 8.0,
+                                      ),
                                       child: Text(
                                         task!.name ?? '',
                                         style: task!.completed!
                                             ? (task!.important!
-                                                ? styCompletedImportantTaskTitle
-                                                : styCompletedTaskTitle)
+                                                  ? styCompletedImportantTaskTitle
+                                                  : styCompletedTaskTitle)
                                             : (task!.important!
-                                                ? styImportantTaskTitle
-                                                : styTaskTitle),
+                                                  ? styImportantTaskTitle
+                                                  : styTaskTitle),
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                       ),

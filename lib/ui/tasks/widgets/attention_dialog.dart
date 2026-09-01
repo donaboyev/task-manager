@@ -8,12 +8,12 @@ class AttentionDialog extends StatelessWidget {
   final String? description;
 
   const AttentionDialog({
-    Key? key,
+    super.key,
     this.onYesTap,
     this.title,
     this.description,
     this.onCancelTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +26,7 @@ class AttentionDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              title ?? 'Confirm deletion',
-              style: styDialogTitle,
-            ),
+            Text(title ?? 'Confirm deletion', style: styDialogTitle),
             const SizedBox(height: 16),
             Text(
               description ??
@@ -54,7 +51,7 @@ class AttentionDialog extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

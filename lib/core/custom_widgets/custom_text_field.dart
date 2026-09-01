@@ -25,7 +25,7 @@ class CustomTextField extends StatelessWidget {
   final bool readOnly;
 
   const CustomTextField({
-    Key? key,
+    super.key,
     this.labelText,
     this.showError,
     this.controller,
@@ -44,7 +44,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.maxLines,
     this.readOnly = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -91,15 +91,14 @@ class CustomTextField extends StatelessWidget {
                   ),
                 ]
               : [],
-          onFieldSubmitted: (term) => fieldFocusChange(
-            context,
-            currentFocus,
-            nextFocus,
-          ),
+          onFieldSubmitted: (term) =>
+              fieldFocusChange(context, currentFocus, nextFocus),
           textInputAction: inputAction,
           decoration: InputDecoration(
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+            contentPadding: const EdgeInsets.symmetric(
+              vertical: 14,
+              horizontal: 12,
+            ),
             filled: true,
             hintText: hintText,
             fillColor: clrBreakerHint,
@@ -143,7 +142,7 @@ class CustomTextField extends StatelessWidget {
     );
   }
 
-  fieldFocusChange(
+  void fieldFocusChange(
     BuildContext context,
     FocusNode? currentFocus,
     FocusNode? nextFocus,

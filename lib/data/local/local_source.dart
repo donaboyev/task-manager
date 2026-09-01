@@ -1,8 +1,8 @@
 import 'package:get_storage/get_storage.dart';
 import 'package:todo_clone/core/constants/app_constants.dart';
-import 'package:todo_clone/data/local/floor/app_database.dart';
-import 'package:todo_clone/data/local/floor/dao/tasks_dao.dart';
-import 'package:todo_clone/data/local/floor/entity/task.dart';
+import 'package:todo_clone/data/local/drift/app_database.dart';
+import 'package:todo_clone/data/local/drift/dao/tasks_dao.dart';
+import 'package:todo_clone/data/model/task.dart';
 
 class LocalSource {
   final _localStorage = GetStorage();

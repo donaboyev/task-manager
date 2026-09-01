@@ -13,13 +13,13 @@ class SearchAppBarWidget extends GetView<TasksController>
   final bool? clearButtonEnabled;
 
   const SearchAppBarWidget({
-    Key? key,
+    super.key,
     this.onChanged,
     this.searchController,
     this.onLeadingTap,
     this.onClearTap,
     this.clearButtonEnabled,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +46,7 @@ class SearchAppBarWidget extends GetView<TasksController>
           ),
         ),
         leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: clrAccent,
-          ),
+          icon: const Icon(Icons.arrow_back_ios, color: clrAccent),
           onPressed: onLeadingTap,
         ),
         actions: [
@@ -58,10 +55,7 @@ class SearchAppBarWidget extends GetView<TasksController>
               visible: controller.clearButtonEnabled,
               child: TextButton(
                 onPressed: onClearTap,
-                child: const Text(
-                  'Clear',
-                  style: stySearchText,
-                ),
+                child: const Text('Clear', style: stySearchText),
               ),
             ),
           ),

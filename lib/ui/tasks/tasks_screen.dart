@@ -11,7 +11,7 @@ import 'package:todo_clone/ui/tasks/widgets/search_app_bar_widget.dart';
 import 'package:todo_clone/ui/tasks/widgets/task_item_widget.dart';
 
 class TasksPage extends GetView<TasksController> {
-  const TasksPage({Key? key}) : super(key: key);
+  const TasksPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +38,11 @@ class TasksPage extends GetView<TasksController> {
                           AppConstants.tagSortByDate,
                         }.map((choice) {
                           return PopupMenuItem<String>(
+                            value: choice,
                             child: Text(
                               choice,
                               style: const TextStyle(color: clrAccent),
                             ),
-                            value: choice,
                           );
                         }).toList();
                       },
@@ -61,6 +61,7 @@ class TasksPage extends GetView<TasksController> {
                       icon: const Icon(Icons.more_vert, color: clrAccent),
                       itemBuilder: (_) => <PopupMenuItem<String>>[
                         PopupMenuItem<String>(
+                          value: AppConstants.tagHideCompleted,
                           child: Row(
                             children: [
                               const Text(
@@ -77,14 +78,13 @@ class TasksPage extends GetView<TasksController> {
                               ),
                             ],
                           ),
-                          value: AppConstants.tagHideCompleted,
                         ),
                         const PopupMenuItem(
+                          value: AppConstants.tagDeleteAllCompleted,
                           child: Text(
                             'Delete all completed',
                             style: stySearchText,
                           ),
-                          value: AppConstants.tagDeleteAllCompleted,
                         ),
                       ],
                       onSelected: (value) {
@@ -174,13 +174,13 @@ class TasksPage extends GetView<TasksController> {
               : const Center(child: Text('No tasks yet', style: styNoData)),
           floatingActionButton: GetBuilder<TasksController>(
             builder: (homeController) => FloatingActionButton(
-              child: const Icon(Icons.add, color: Colors.white),
               onPressed: () async {
                 Get.toNamed(AppRoutes.addEdit);
               },
               backgroundColor: clrAccent,
               elevation: 0,
               highlightElevation: 0,
+              child: const Icon(Icons.add, color: Colors.white),
             ),
           ),
         ),
