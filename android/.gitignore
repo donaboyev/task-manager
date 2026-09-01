@@ -10,3 +10,5 @@ GeneratedPluginRegistrant.java
 # See https://flutter.dev/docs/deployment/android#reference-the-keystore-from-the-app
 key.properties
 app/tugatdim-key.jks
+fastlane/play_store_key.json
+fastlane/report.xml

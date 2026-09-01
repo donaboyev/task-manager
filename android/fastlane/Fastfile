@@ -1,0 +1,35 @@
+default_platform(:android)
+
+platform :android do
+  private_lane :validate_flutter_project do
+    sh("cd ../.. && flutter pub get")
+    sh("cd ../.. && flutter analyze")
+    sh("cd ../.. && flutter test")
+  end
+
+  desc "Validate and build the signed release AAB locally"
+  lane :build_release do
+    validate_flutter_project
+    sh("cd ../.. && flutter build appbundle --release")
+
+    aab = File.expand_path("../../build/app/outputs/bundle/release/app-release.aab")
+    UI.user_error!("Release AAB was not generated at #{aab}") unless File.exist?(aab)
+    UI.success("Signed release AAB is ready at #{aab}")
+  end
+
+  desc "Build locally and upload to Google Play Internal Testing"
+  lane :deploy do
+    build_release
+
+    aab = File.expand_path("../../build/app/outputs/bundle/release/app-release.aab")
+
+    upload_to_play_store(
+      track: "internal",
+      aab: aab,
+      skip_upload_metadata: true,
+      skip_upload_changelogs: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+end

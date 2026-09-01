@@ -43,7 +43,7 @@ class TasksController extends GetxController {
 
   Future<void> setSortOrder(SortOrder order) async {
     if (order == _repository!.getSortOrder()) return;
-    _repository!.setSortOrder(order);
+    _repository.setSortOrder(order);
     getTasks();
   }
 
@@ -56,8 +56,8 @@ class TasksController extends GetxController {
   Future<void> getTasks() async {
     _tasks = await _repository!.getTasks(
       '%${searchController!.text.toString().trim()}%',
-      _repository!.getSortOrder(),
-      _repository!.getHideCompleted(),
+      _repository.getSortOrder(),
+      _repository.getHideCompleted(),
     );
     update();
   }
