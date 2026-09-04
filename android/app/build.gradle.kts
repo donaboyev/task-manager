@@ -15,7 +15,9 @@ plugins {
 
 android {
     namespace = "com.donaboyev.todo_clone"
-    compileSdk = flutter.compileSdkVersion
+    // Keep the Play Store target explicit so release builds do not depend on
+    // the default supplied by whichever Flutter SDK happens to build them.
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -26,7 +28,7 @@ android {
     defaultConfig {
         applicationId = "com.donaboyev.tugatdim"
         minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
